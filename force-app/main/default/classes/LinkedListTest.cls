@@ -93,4 +93,15 @@ public class LinkedListTest {
         
         System.assertEquals('3 -> 2 -> 1 -> null', clist.toString());
     }
+
+    @isTest
+    static void testDeletedNode() {
+        LinkedList clist = new LinkedList();
+        clist.push(1);
+        clist.push(2);
+        clist.push(3);
+        
+        LinkedList.ListNode tempNode = clist.deleteNode(1);
+        System.assertEquals(2, tempNode.data);
+    }
 }

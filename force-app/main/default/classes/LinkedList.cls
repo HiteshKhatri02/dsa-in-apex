@@ -186,4 +186,39 @@ public class LinkedList {
         sb += 'null';
         return sb.toString();
     }
+
+    /**
+     * @description deleteNode delete node from specific position
+     * @param  position position delete the node
+     */
+    public ListNode deleteNode(Integer position)
+    {
+        // If linked list is empty
+        if (this.head == null)
+            return null;
+ 
+        // Store head node
+        ListNode temp = this.head;
+ 
+        // If head needs to be removed
+        if (position == 0) {
+            this.head = temp.next; // Change head
+            return null;
+        }
+        // Find previous node of the node to be deleted
+        
+        for (Integer i = 0; temp != null && i < position - 1; i++)
+            temp = temp.next;
+
+        // If position is more than number of nodes
+        if (temp == null || temp.next == null)
+            return null;
+ 
+        // Node temp->next is the node to be deleted
+        // Store pointer to the next of node to be deleted
+        ListNode next = temp.next.next;
+        ListNode deletedNode = temp.next;
+        temp.next = next; // Unlink the deleted node from list
+        return deletedNode;
+    }
 }
