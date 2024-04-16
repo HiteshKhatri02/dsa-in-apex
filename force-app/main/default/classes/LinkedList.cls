@@ -6,9 +6,9 @@ public class LinkedList {
     // Inner class representing a node in the linked list
     public class ListNode {
         @TestVisible
-        protected Object data;
+        public Object data;
         @TestVisible
-        protected ListNode next;
+        public ListNode next;
         
         /**
          * Constructs a new ListNode with the given data.
@@ -179,10 +179,13 @@ public class LinkedList {
     public override String toString() {
         String sb;
         ListNode current = head;
+       
         while (current != null) {
-            sb += current.data + ' -> ';
+            String cString = current.data + ' -> ';
+            sb = String.isBlank(sb) ? cString :  sb + cString;
             current = current.next;
         }
+
         sb += 'null';
         return sb.toString();
     }
@@ -220,5 +223,27 @@ public class LinkedList {
         ListNode deletedNode = temp.next;
         temp.next = next; // Unlink the deleted node from list
         return deletedNode;
+    }
+
+    public ListNode get(Integer position){
+        if(this.head == null) return null;        
+
+        ListNode temp = this.head;
+        ListNode currentNode;
+        Integer i = 0;
+        
+        while(i <= position  && temp != null){
+            currentNode = temp;
+            if(i == position){ break; }
+            temp = temp.next;
+            i++;
+        }
+        
+        if(position > i) {
+            throw new ListException();
+        }
+       
+       return currentNode;
+
     }
 }
